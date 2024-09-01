@@ -1,7 +1,7 @@
 
 import { FreshContext, PageProps, Handlers } from "$fresh/server.ts";
-import { render } from "$fresh/src/server/render.ts";
-import type { aCampo, aCampos, tCampo } from "./api/db.ts"
+//import { render } from "$fresh/src/server/render.ts";
+import type { aCampo, aCampos, tCampo } from "./api/dbx.ts"
 
 interface Props {
   perfil: aCampos | null;
@@ -13,7 +13,7 @@ export const handler: Handlers<Props> = {
       const id = url.searchParams.get("id") || "";
       //const form = await _req.formData();
       //const id = form.get("id")?.toString();
-      console.debug("handler id: [" , Number(id), "]");
+      //console.debug("handler id: [" , Number(id), "]");
       try {
         const response = await fetch("http://localhost:8000/api/db?id=" + id);
         if (!response.ok) {
@@ -34,21 +34,19 @@ export const handler: Handlers<Props> = {
   
 export default function MontaForm(perfil: PageProps<Props>) {
     const { data } = perfil;
-    console.debug(`MontaForm entrou`);
+    //console.debug(`MontaForm entrou`);
     if (!data || !data.perfil || data.perfil.length < 1) {
       return (
         <form>
           <input type="number" name={"id"} min={1} max={100000} maxLength={7}/>
-          <input type={"submit"}>
-            Pesquise!
-          </input>
+          <input type={"submit"} name={"manda"} label={"manda"} value={"manda"} />
         </form>
       ); 
     }
 
     let form = '<form>';
     const cPerfil = data.perfil || undefined;
-    console.debug(data);
+    //console.debug(data);
     cPerfil.forEach((campos:aCampo) => {
       campos.map((campo:tCampo) => {
         form += `<label for="${campo.name}">${campo.name}: </label>\n`;
@@ -56,7 +54,7 @@ export default function MontaForm(perfil: PageProps<Props>) {
       });
     });
     form += '<div hx-post="/updatePerson" >Atualizar</div></form>';
-
+    return form;
     return (
       <>
       <form>

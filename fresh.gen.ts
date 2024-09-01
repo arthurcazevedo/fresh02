@@ -4,21 +4,21 @@
 
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
-import * as $api_db from "./routes/api/db.ts";
 import * as $api_db_index from "./routes/api/db/index.ts";
+import * as $api_dbx from "./routes/api/dbx.ts";
 import * as $api_joke from "./routes/api/joke.ts";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $perfil_perfil from "./routes/perfil/perfil.tsx";
 import * as $Counter from "./islands/Counter.tsx";
-import { type Manifest } from "$fresh/server.ts";
+import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
-    "./routes/api/db.ts": $api_db,
     "./routes/api/db/index.ts": $api_db_index,
+    "./routes/api/dbx.ts": $api_dbx,
     "./routes/api/joke.ts": $api_joke,
     "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,
