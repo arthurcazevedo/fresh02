@@ -44,25 +44,35 @@ export default function MontaForm(perfil: PageProps<Props>) {
       ); 
     }
 
-    let form = '<form>';
     const cPerfil = data.perfil || undefined;
-    //console.debug(data);
-    cPerfil.forEach((campos:aCampo) => {
-      campos.map((campo:tCampo) => {
-        form += `<label for="${campo.name}">${campo.name}: </label>\n`;
-        form += `<input type="${campo.type}" id="${campo.name}" name="${campo.name}" size=${campo.size} value="${campo.value}"/>`;
-      });
-    });
-    form += '<div hx-post="/updatePerson" >Atualizar</div></form>';
-    return form;
+    //let form = '<form>';
+    ////console.debug(data);
+    //cPerfil.forEach((campos:aCampo) => {
+    //  campos.map((campo:tCampo) => {
+    //    form += `<label for="${campo.name}">${campo.name}: </label>\n`;
+    //    form += `<input type="${campo.type}" id="${campo.name}" name="${campo.name}" size=${campo.size} value="${campo.value}"/>`;
+    //  });
+    //});
+    //form += '<div hx-post="/updatePerson" >Atualizar</div></form>';
     return (
-      <>
       <form>
-        { cPerfil[0].map((campo:tCampo) => {
-            <input type="${campo.type}" id="${campo.name}" name="${campo.name}" size="${campo.size}" value="${campo.value}"/>;
-          })
+        { cPerfil.map((campos:aCampo) => (
+          campos.map((campo:tCampo) => (
+            <>
+            <label for="${campo.name}">{campo.name}: </label>
+            <input type={campo.type}
+                   id={campo.name}
+                   name={campo.name}
+                   placeholder={"Digite"}
+                   label={campo.name}
+                   size={campo.size}
+                   value={campo.value}/>
+            </>
+          ))
+        ))
         }
+        <button type={"submit"} hx-post="/updatePerson">Altera</button>
       </form>
-      </>
     )
-}
+
+  }
